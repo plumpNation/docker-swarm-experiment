@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  proxy:
+    hostname: proxy
+    image: nginx:1.21.1
+    deploy:
+      replicas: 1
+    ports:
+      - "1234:80"
+    depends_on:
+      - backend
+    volumes:
+      - "./nginx/configuration/mime.types:/etc/nginx/mime.types"
+      - "./nginx/configuration/default.conf:/etc/nginx/conf.d/more-complex.conf"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+
+  backend:
+    hostname: backend
+    image: nginx:1.21.1
+    deploy:
+      replicas: 1
+    ports:
+      - "1235:80"
+    volumes:
+      - "./src/html:/usr/share/nginx/html"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+
+networks:
+  default:
+    name: plump-net
+    driver: overlay
