@@ -3,33 +3,30 @@ services:
   nginx-proxy:
     hostname: nginx-proxy
     build: ./nginx-proxy
-    image: nginx-proxy:latest
+    image: nginx-proxy
     deploy:
       replicas: 1
     ports:
       - "1234:80"
-    # volumes:
-      # - "./nginx/configuration/mime.types:/etc/nginx/mime.types"
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost"]
-    #   interval: 5s
-    #   retries: 150
-    #   start_period: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 5s
+      retries: 150
+      start_period: 10s
 
   backend:
     hostname: backend
-    image: nginx:1.13.11
+    build: ./backend
+    image: nginx-backend
     deploy:
       replicas: 1
     ports:
       - "1235:80"
-    volumes:
-      - "./src/html:/usr/share/nginx/html"
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost"]
-      # interval: 5s
-      # retries: 150
-      # start_period: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 5s
+      retries: 150
+      start_period: 10s
 
 networks:
   default:
