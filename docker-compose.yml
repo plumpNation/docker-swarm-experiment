@@ -2,7 +2,7 @@ version: "3.7"
 services:
   proxy:
     hostname: proxy
-    image: nginx:1.21.1
+    image: nginx:1.13.11
     deploy:
       replicas: 1
     ports:
@@ -17,7 +17,7 @@ services:
 
   backend:
     hostname: backend
-    image: nginx:1.21.1
+    image: nginx:1.13.11
     deploy:
       replicas: 1
     ports:
