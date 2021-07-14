@@ -1,4 +1,4 @@
-FROM nginx:1.13.11
+FROM nginx:1.21.1
 RUN apt-get update && apt-get install -y curl
 COPY ./configuration/mime.types /etc/nginx/mime.types
 
