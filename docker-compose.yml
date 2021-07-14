@@ -31,4 +31,4 @@ services:
 networks:
   default:
     name: plump-net
-    external: true
+    driver: overlay
