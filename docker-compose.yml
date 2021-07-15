@@ -21,9 +21,9 @@ services:
     deploy:
       replicas: 1
     ports:
-      - "1235:80"
+      - "1235:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
       interval: 5s
       retries: 150
       start_period: 10s
@@ -31,4 +31,4 @@ services:
 networks:
   default:
     name: plump-net
-    driver: overlay
+    external: true
