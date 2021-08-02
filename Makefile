@@ -20,5 +20,5 @@ shutdown: ## Shut the stack down
 update-proxy: ## network is external in the docker-compose
 	docker service update --force PLUMP-test_nginx-proxy
 
-network:
+network: ## start up external network
 	docker network create --driver overlay plump-net
